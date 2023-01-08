@@ -1,14 +1,7 @@
-# 2.0-sample_python
+# Sample Python / Jupyter Functionality
 
-> This repository contains a mix of procedures that can be performed in python for simple analytics and operational workflows.
-
-Designed to easily to be passed to Jupyter.
-
-## Key Topics
-* Merge
-* Mismatching Values
-* Plot
-* Query 
+> This repository contains a mix of procedures that can be performed in python for simple analytics and operational workflows. These files and processes are designed to be moves to Jupyter for a more modular use case.
+> The key areas of this respository consist of merging, isolating mismatching values, plotting, and query with dynamic inputs.
 
 ## Context
 For these examples, we are utilizing two sample datasets. One of the examples is orders, and the other items. Below is a previe
