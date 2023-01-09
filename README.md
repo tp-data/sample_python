@@ -1,7 +1,7 @@
 # Sample Python / Jupyter Functionality
 
 > This repository contains a mix of procedures that can be performed in python for simple analytics and operational workflows. These files and processes are designed to be moves to Jupyter for a more modular use case.
-> The key areas of this respository consist of merging, isolating mismatching values, plotting, and query with dynamic inputs.
+> The key areas of this respository consist of merging, isolating mismatching values, plotting, and filtering data by dynamic inputs.
 
 ## Context
 For these examples, we are utilizing two sample datasets. One of the examples is orders, and the other items. Below is a previe
@@ -46,6 +46,25 @@ Using the grouped dataset, we can pivot by item to display a line graph with a l
 item_amount_by_month = orders_by_month.pivot(index='month', columns='item_name', values='amount')
 item_amount_by_month.plot()
 ```
-### Query
+### Filtering by Dynamic Inputs
+This section provides a demo of how Python can be utilized to filter data by different parameters. In this example we will use the previous datasets to isolate order records based on inputs from a CSV file. The filter_info.csv file contains a column for three item_ids, as well as the desired start and end date for each item_id. Using a _for loop_ we will place each value into a variable to then use in filtering the main dataframe.
+Below you can see the for loop that performs the isolation of each filter value. Next, we filter the main data by those values. The last section is focused on appending the values and concatening the final results.
 ```
+output = []
+
+for i in range(0,query_info.shape[0]):
+    item_id = query_info.iloc[i][0]
+    start = query_info.iloc[i][1]
+    end = query_info.iloc[i][2]
+    
+    temp_orders_with_items = orders_with_items[
+        (orders_with_items['item_id'] == item_id) 
+        & (orders_with_items['date'] >= start) 
+        & (orders_with_items['date'] <= end) 
+    ]
+    
+    temp_output = pd.DataFrame(temp_orders_with_items)
+    output.append(temp_output)
+all_output = pd.concat(output)
 ```
+After this code runs, the output contains the records matching the filter criteria.
